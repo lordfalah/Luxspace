@@ -1,0 +1,26 @@
+body {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+.nav-bar-menu::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 1px;
+  display: block;
+  transition: all 0.3s ease;
+  bottom: 5%;
+}
+
+.slick-slide {
+  padding: 0 10px !important;
+  box-sizing: border-box !important;
+}
+
+.slick-slider button.slick-prev {
+  display: none !important;
+}
+
+.slick-slider button.slick-next {
+  display: none !important;
+}
