@@ -1,13 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import ShoppingCart from "../../assets/icon/ShoppingCart";
 import Container from "../../components/Container";
 import { formatRupiah } from "../../helpers/format";
+import { useInView } from "react-intersection-observer";
 
-const HeroProduct = ({ data, navigation }) => {
-  const [selectImg, setSelectImg] = useState("");
+const HeroProduct = ({ data, navigation, selectImg, setSelectImg }) => {
   const { category, setCategory } = useOutletContext();
   const timeOut = useRef(null);
+
+  const {
+    ref: products,
+    inView,
+    entry,
+  } = useInView({
+    threshold: 0.5,
+    triggerOnce: true,
+  });
 
   const addToCart = () => {
     const iconCart = document.querySelectorAll(".icon-cart");
@@ -35,7 +44,7 @@ const HeroProduct = ({ data, navigation }) => {
   };
 
   return (
-    <section>
+    <section ref={products}>
       <Container className="px-4 sm:px-0">
         <main className="flex flex-col lg:flex-row lg:gap-x-10 xl:gap-x-14 2xl:gap-x-24 gap-y-5">
           <div className="space-y-3 block md:hidden">
@@ -63,7 +72,11 @@ const HeroProduct = ({ data, navigation }) => {
               navigation?.state === "loading" ? "animate-pulse" : ""
             }`}
           >
-            <div className="h-80 overflow-hidden md:h-[600px] lg:w-[500px] md:w-full md:my-auto">
+            <div
+              className={`h-80 overflow-hidden md:h-[600px] lg:w-[500px] md:w-full md:my-auto transition duration-300 delay-200 ease-in-out ${
+                inView ? "opacity-100" : "opacity-0"
+              }`}
+            >
               <img
                 className="object-cover bg-no-repeat h-full mx-auto"
                 src={selectImg ? selectImg : data?.imgUrls[0]}
@@ -79,7 +92,12 @@ const HeroProduct = ({ data, navigation }) => {
                 <div
                   onClick={() => setSelectImg(image)}
                   key={idx}
-                  className={`snap-center cursor-pointer w-32 h-32 md:w-28 md:h-28 flex flex-shrink-0 transition duration-150 ease-linear relative overflow-hidden box-border bg-black ${
+                  style={{ transitionDelay: `${idx * 0.5}s` }}
+                  className={`transition duration-150 ease-linear ${
+                    inView
+                      ? "translate-x-0 opacity-100"
+                      : "-translate-x-56 opacity-0"
+                  } snap-center cursor-pointer w-32 h-32 md:w-28 md:h-28 flex flex-shrink-0 transition duration-150 ease-linear relative overflow-hidden box-border bg-black ${
                     image === selectImg
                       ? "border-2 border-solid border-black rounded-xl after:content-[''] after:absolute after:inset-0 after:bg-black/30 after:transition after:duration-200 after:ease-in-out"
                       : ""

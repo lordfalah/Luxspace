@@ -25,7 +25,7 @@ const Header = ({ category }) => {
     {
       title: "Delivery",
       path: "/",
-      to: "html",
+      to: "#clients",
     },
 
     {
@@ -70,7 +70,7 @@ const Header = ({ category }) => {
         style={{
           borderStyle: `${!inView ? "inset" : "none"}`,
         }}
-        className={`fixed top-0 transition duration-200 ease-in-out  w-full z-50 ${
+        className={`fixed top-0 transition duration-200 ease-in-out w-full z-50 ${
           !inView ? "bg-gradient-to-r from-white/60 to-black/30 shadow-md" : ""
         }`}
       >

@@ -1,4 +1,4 @@
-import React, { Fragment, useLayoutEffect } from "react";
+import React, { Fragment, useLayoutEffect, useState } from "react";
 import { useLoaderData, useNavigation } from "react-router-dom";
 import api from "../../api/baseApi";
 import Footer from "../../components/Footer";
@@ -21,6 +21,7 @@ export const loaderDetailProduct = async ({ params }) => {
 const Index = () => {
   const data = useLoaderData();
   const navigation = useNavigation();
+  const [selectImg, setSelectImg] = useState("");
 
   useLayoutEffect(() => {
     const html = document.querySelector("html");
@@ -39,8 +40,13 @@ const Index = () => {
         itemsLink={itemsLink}
         className="px-4 sm:px-0 py-7 mb-14 mt-20"
       />
-      <HeroProduct data={data} navigation={navigation} />
-      <AboutProduct data={data} />
+      <HeroProduct
+        data={data}
+        navigation={navigation}
+        selectImg={selectImg}
+        setSelectImg={setSelectImg}
+      />
+      <AboutProduct data={data} setSelectImg={setSelectImg} />
       <SideMap></SideMap>
       <Footer />
     </Fragment>

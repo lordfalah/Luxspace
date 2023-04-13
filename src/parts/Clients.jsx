@@ -10,7 +10,7 @@ const Clients = () => {
   ];
 
   return (
-    <section className="py-16">
+    <section className="py-16" id="clients">
       <Container>
         <div className="flex flex-col md:flex-row flex-wrap justify-center items-center gap-14">
           {clientImg.map((data, idx) => (

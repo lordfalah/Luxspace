@@ -3,7 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import api from "../../api/baseApi";
 
 const ShippingCart = () => {
-  const { category } = useOutletContext();
+  const { category, setCategory } = useOutletContext();
   const [checkout, setCheckout] = useState({
     isLoading: false,
     isError: false,
@@ -38,6 +38,7 @@ const ShippingCart = () => {
       try {
         const response = await api.post("/checkout", form);
         if (response.status === 201) {
+          setCategory([]);
           navigate("/congratulation");
         }
       } catch (error) {

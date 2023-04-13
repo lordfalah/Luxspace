@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import Container from "../../components/Container";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useNavigation } from "react-router-dom";
 
 const itemsLink = [
   { name: "Home", path: "/" },
@@ -10,13 +10,17 @@ const itemsLink = [
 
 const Congratulation = () => {
   const navigate = useNavigate("");
+  const { state } = useNavigation();
+
   return (
     <Fragment>
       <BreadCrumb itemsLink={itemsLink} className="px-4 sm:px-0 py-7 mt-20" />
-      <section className="mt-0 md:mt-10">
+      <section className="mt-5 sm:mt-0">
         <Container>
           <img
-            className="mx-auto"
+            className={`mx-auto object-cover w-3/4 sm:w-fit ${
+              state === "loading" ? "animate-bounce" : ""
+            }`}
             src="/images/content/illustration-success.png"
             alt="Success"
           />

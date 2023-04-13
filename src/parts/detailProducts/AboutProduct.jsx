@@ -56,14 +56,15 @@ const settings = customSlickSett(
   }
 );
 
-const AboutProduct = ({ data }) => {
+const AboutProduct = ({ data, setSelectImg }) => {
   const navigate = useNavigate("");
 
   const onLongPress = () => {
     return null;
   };
 
-  const onClick = (id) => {
+  const onClick = (id, imageUrl) => {
+    setSelectImg(imageUrl);
     const html = document.querySelector("html");
     html.scrollIntoView({
       behavior: "smooth",
@@ -77,8 +78,12 @@ const AboutProduct = ({ data }) => {
     shouldPreventDefault: true,
     delay: 100,
   };
-  const longPressEvent = (id) => {
-    return useLongPress(onLongPress, () => onClick(id), defaultOptions);
+  const longPressEvent = (id, imageUrl) => {
+    return useLongPress(
+      onLongPress,
+      () => onClick(id, imageUrl),
+      defaultOptions
+    );
   };
 
   return (
@@ -92,12 +97,12 @@ const AboutProduct = ({ data }) => {
         <Slider {...settings}>
           {data?.relatedProducts.map(({ imageUrl, id, title, price }) => (
             <div
-              {...longPressEvent(id)}
+              {...longPressEvent(id, imageUrl)}
               key={id}
               className="rounded-lg bg-white px-4 pt-4 pb-6 cursor-grab hover:cursor-grab focus:cursor-grabbing"
             >
               <div
-                className="h-40  origin-center bg-cover bg-no-repeat rounded-lg"
+                className="h-40 origin-center bg-cover bg-no-repeat rounded-lg"
                 style={{ backgroundImage: `url(${imageUrl})` }}
               ></div>
               <div>
