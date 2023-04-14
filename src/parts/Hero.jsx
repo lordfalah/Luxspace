@@ -93,18 +93,19 @@ const Hero = () => {
         <div className="w-full inset-0">
           <div className="md:relative">
             <div className="absolute -z-10 md:z-10 inset-0 bg-black/[35%]"></div>
-
-            <button
-              onClick={() => setIsOpen(true)}
-              type="button"
-              className={`flex justify-center items-center absolute md:top-1/2   md:-translate-x-1/2 group transition-all duration-200 ease-linear md:-translate-y-1/2 z-20 bg-blue-100 right-7 -bottom-5 w-12 h-12 md:w-20 md:h-20 rounded-full ${
-                inView
-                  ? "opacity-100 md:left-1/2 delay-300"
-                  : "translate-x-80 opacity-0 md:left-full"
+            <div
+              className={`w-fit absolute md:top-1/2 md:-translate-x-1/2 group transition-all duration-200 ease-linear md:-translate-y-1/2 z-20 h-fit right-7 -bottom-5 md:left-1/2 delay-1000 ${
+                inView ? "opacity-100 scale-100" : "opacity-0 scale-0"
               }`}
             >
-              <Play className="fill-white stroke-none md:w-11 md:h-11 group-hover:fill-black/20" />
-            </button>
+              <button
+                onClick={() => setIsOpen(true)}
+                type="button"
+                className={`flex justify-center items-center bg-blue-100 w-12 h-12 md:w-20 md:h-20 rounded-full `}
+              >
+                <Play className="fill-white stroke-none md:w-11 md:h-11 group-hover:fill-black/20" />
+              </button>
+            </div>
 
             <img
               src="images/content/image-section-1.png"

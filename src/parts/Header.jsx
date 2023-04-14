@@ -46,9 +46,9 @@ const Header = ({ category }) => {
     },
   ];
 
-  const handleScrollToTop = (tags) => {
+  const handleScrollToTop = async (tags) => {
     try {
-      const elm = document.querySelector(tags);
+      const elm = await document.querySelector(tags);
       elm.scrollIntoView({
         behavior: "smooth",
         block: "start",
